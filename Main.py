@@ -17,6 +17,10 @@ os.chdir("/home/aryan/Desktop/APProject/AP_Project99/songs")
 print(os.getcwd)
 crr_playlist = os.listdir()
 
+"""volume edit"""
+VolumeLevel = tkr.Scale(player_window, from_ = 0.0, to_ = 1.0, orient = tkr.VERTICAL, resolution = 0.1)
+
+
 """show playlist"""
 songlist = tkr.Listbox(player_window, highlightcolor = "blue", selectmode = tkr.SINGLE)
 print(crr_playlist)
@@ -33,22 +37,35 @@ def play_music():
     pygame.mixer.music.load(songlist.get(tkr.ACTIVE))
     var.set(songlist.get(tkr.ACTIVE))
     pygame.mixer.music.play()
+    pygame.mixer.music.set_volume(VolumeLevel.get())
 
 def stop_music():
     pygame.mixer.music.stop()
 
+def pause_music():
+    pygame.mixer.music.pause()
+
+def resume_music():
+    pygame.mixer.music.unpause()
+
 
 """window buttons"""
-play_button = tkr.Button(player_window, width = 5, height = 3, text = "PLAY", command = play_music)
-stop_button = tkr.Button(player_window, width = 5, height = 3, text = "STOP", command = stop_music)
+play_button = tkr.Button(player_window, width = 5, height = 1, text = "PLAY", command = play_music)
+stop_button = tkr.Button(player_window, width = 5, height = 1, text = "STOP", command = stop_music)
+pause_button = tkr.Button(player_window, width = 5, height = 1, text = "PAUSE", command = pause_music)
+resume_button = tkr.Button(player_window, width = 5, height = 1, text = "GO", command = resume_music)
+
 
 """song labels"""
 var = tkr.StringVar()
 songtitle = tkr.Label(player_window, textvariable = var)
 
 """place features"""
-stop_button.pack(fill = "x")
 play_button.pack(fill = "x")
+stop_button.pack(fill = "x")
+pause_button.pack(fill = "x")
+resume_button.pack(fill = "x")
+VolumeLevel.pack(fill = "x")
 songtitle.pack()
 songlist.pack(fill = "both", expand = "yes")
 
