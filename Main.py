@@ -17,10 +17,6 @@ os.chdir("/home/aryan/Desktop/APProject/AP_Project99/songs")
 print(os.getcwd)
 crr_playlist = os.listdir()
 
-"""volume edit"""
-VolumeLevel = tkr.Scale(player_window, from_ = 0.0, to_ = 1.0, orient = tkr.VERTICAL, resolution = 0.1)
-
-
 """show playlist"""
 songlist = tkr.Listbox(player_window, highlightcolor = "blue", selectmode = tkr.SINGLE)
 print(crr_playlist)
@@ -48,6 +44,13 @@ def pause_music():
 def resume_music():
     pygame.mixer.music.unpause()
 
+def update_volume(vlevel):
+    #print(vlevel)
+    pygame.mixer.music.set_volume(float(vlevel) / 100.0)
+
+"""volume edit"""
+VolumeLevel = tkr.Scale(player_window, from_ = 100, to_ = 0, orient = tkr.VERTICAL, command = update_volume, resolution = 1)
+VolumeLevel.set(33)
 
 """window buttons"""
 play_button = tkr.Button(player_window, width = 5, height = 1, text = "PLAY", command = play_music)
