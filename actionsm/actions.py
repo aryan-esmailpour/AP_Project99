@@ -3,17 +3,23 @@ import os
 import pygame
 import tkinter as tkr
 from tkinter import filedialog
+import random
+
 
 """vars"""
 global songlist
 global crr_dir
+global crr_song
 global var
 global songtitle
 global volume_level
 global song_idx
+global sh_rp
+global sh_rp_label
 volume_level = 0.33
 isfolder = 0
 song_idx = 0
+
 crr_playlist = []
 
 """inits"""
@@ -71,12 +77,30 @@ def stop_music():
 
 def pause_music():
     pygame.mixer.music.pause()
+ #   title_label.set
 
 def resume_music():
     pygame.mixer.music.unpause()
 
 def update_volume(vlevel):
     pygame.mixer.music.set_volume(float(vlevel) / 100.0)
+
+def update_label(): #  updates the variable label to show which song is playing
+    global index
+  #  title_label.set(titles[index])
+
+def shuffle_music(): # selects a random song
+    global index
+    index = crr_playlist.index(random.choice(crr_playlist))
+    #pygame.mixer.music.load(crr_playlist[index])
+    sh_rp.set("SHUFFLE")
+    pygame.mixer.music.load(crr_dir + '/' + crr_playlist[index])
+    pygame.mixer.music.play()
+
+def repeat_music():
+    #pygame.mixer.music.stop()
+    sh_rp.set("REPEAT")
+    pygame.mixer.music.play(-1)
 
 def dir_load():
     global crr_dir
@@ -112,8 +136,12 @@ def next_load():
 def set_songtitle(player_window):
     global var
     global songtitle
+    global sh_rp
+    global sh_rp_label
     var = tkr.StringVar()
     songtitle = ((tkr.Label(player_window, textvariable = var)))
+    sh_rp = tkr.StringVar()
+    sh_rp_label = ((tkr.Label(player_window, textvariable=sh_rp)))
 
 def next_song():
     global song_idx
@@ -125,6 +153,8 @@ def next_song():
     songlist.select_set(song_idx)
     songlist.activate(song_idx)
     play_music()
+  #  update_label()
+
 
 def prev_song():
     global song_idx
@@ -137,9 +167,11 @@ def prev_song():
     songlist.select_set(song_idx)
     songlist.activate(song_idx)
     play_music()
+   # update_label()
+
 
 def place_lists():
     global songtitle
     songtitle.place(x = 0, y = 0)
+    sh_rp_label.place(x = 0, y = 140)
     songlist.grid(row = 0, column = 4)
-
