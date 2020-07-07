@@ -4,6 +4,7 @@ import pygame
 import tkinter as tkr
 from tkinter import filedialog
 import random
+from tinytag import TinyTag
 
 
 """vars"""
@@ -70,7 +71,16 @@ def play_music():
     pygame.mixer.music.load(crr_dir + '/' + songlist.get(tkr.ACTIVE))
     var.set(songlist.get(tkr.ACTIVE))
     pygame.mixer.music.play()
+    tinytag(crr_dir + '/' + songlist.get(tkr.ACTIVE))
     pygame.mixer.music.set_volume(volume_level)
+
+def tinytag(address):
+    tag = TinyTag.get(address)
+    artist= "artist: "
+    #tinySongTitle.set(str(tag.title))
+    tinySongTitle.set(artist + str(tag.artist))
+    album = "album: "
+    tinySongalbum.set(album + str(tag.album))
 
 def stop_music():
     pygame.mixer.music.stop()
@@ -138,10 +148,18 @@ def set_songtitle(player_window):
     global songtitle
     global sh_rp
     global sh_rp_label
+    global tinySongTitle
+    global tinySongTitle_label
+    global tinySongalbum_label
+    global tinySongalbum
     var = tkr.StringVar()
     songtitle = ((tkr.Label(player_window, textvariable = var)))
     sh_rp = tkr.StringVar()
     sh_rp_label = ((tkr.Label(player_window, textvariable=sh_rp)))
+    tinySongTitle = tkr.StringVar()
+    tinySongTitle_label = ((tkr.Label(player_window, textvariable= tinySongTitle )))
+    tinySongalbum = tkr.StringVar()
+    tinySongalbum_label = ((tkr.Label(player_window, textvariable= tinySongalbum )))
 
 def next_song():
     global song_idx
@@ -175,3 +193,5 @@ def place_lists():
     songtitle.place(x = 0, y = 0)
     sh_rp_label.place(x = 0, y = 140)
     songlist.grid(row = 0, column = 4)
+    tinySongTitle_label.place(x=0, y=20)
+    tinySongalbum_label.place(x=0, y=40)
