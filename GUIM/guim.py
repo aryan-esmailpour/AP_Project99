@@ -26,19 +26,28 @@ class guim:
         actions.update_songlist()
 
     def make_buttons(self):
-        self.play_button = tkr.Button(self.wind, width=5, height=1, text="PLAY", command=actions.play_music)
-        self.stop_button = tkr.Button(self.wind, width=5, height=1, text="STOP", command=actions.stop_music)
-        self.pause_button = tkr.Button(self.wind, width=5, height=1, text="PAUSE", command=actions.pause_music)
-        self.resume_button = tkr.Button(self.wind, width=5, height=1, text="RESUME", command=actions.resume_music)
-        self.browse_button = tkr.Button(self.wind, width=5, height=1, text="Browse...", command=actions.dir_load)
-        self.queue_button = tkr.Button(self.wind, width=5, height=1, text="play next", command=actions.next_load)
-        self.next_button = tkr.Button(self.wind, width=5, height=1, text="next", command=actions.next_song)
-        self.prev_button = tkr.Button(self.wind, width=5, height=1, text="prev", command=actions.prev_song)
-        self.repeat_button = tkr.Button(self.wind, width=5, height=1, text="REPEAT", command=actions.repeat_music)
-        self.shuffle_button = tkr.Button(self.wind, width=5, height=1, text="shuffle", command=actions.shuffle_music)
+        self.play_button = tkr.Button(self.wind, width=5, height=1, bg='gray51', fg='white', text="PLAY",
+                                      command=actions.play_music)
+        self.stop_button = tkr.Button(self.wind, width=5, height=1, bg='gray45', fg='white', text="STOP",
+                                      command=actions.stop_music)
+        self.pause_button = tkr.Button(self.wind, width=5, height=1, bg='gray43', fg='white', text="PAUSE",
+                                       command=actions.pause_music)
+        self.resume_button = tkr.Button(self.wind, width=5, height=1, bg='gray41', fg='white', text="RESUME",
+                                        command=actions.resume_music)
+        self.browse_button = tkr.Button(self.wind, width=5, height=1, bg='gray39', fg='white', text="Browse...",
+                                        command=actions.dir_load)
+        self.queue_button = tkr.Button(self.wind, width=5, height=1, bg='gray37', fg='white', text="play next",
+                                       command=actions.next_load)
+        self.next_button = tkr.Button(self.wind, width=5, height=1, bg='gray35', fg='white', text="next",
+                                      command=actions.next_song)
+        self.prev_button = tkr.Button(self.wind, width=5, height=1, bg='gray33', fg='white', text="prev",
+                                      command=actions.prev_song)
+        self.repeat_button = tkr.Button(self.wind, width=5, height=1, bg='gray29', fg='white', text="REPEAT",
+                                        command=actions.repeat_music)
+        self.shuffle_button = tkr.Button(self.wind, width=5, height=1, bg='gray27', fg='white', text="shuffle",
+                                         command=actions.shuffle_music)
 
     def go_run(self):
-
         self.wind.mainloop()
 
     def make_songlist(self):
@@ -63,10 +72,8 @@ class guim:
 
     def set_volume(self):
         self.VolumeLevel = tkr.Scale(self.wind, from_=100, to_=0, orient=tkr.VERTICAL, command=self.update_vlc,
-                                     resolution=1)
+                                     resolution=1, bg = 'gray62')
         self.VolumeLevel.set(33)
 
     def song_label(self):
         actions.set_songtitle(self.wind)
-
-
